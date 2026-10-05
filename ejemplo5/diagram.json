@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "author": "JUAN MANUEL HERNANDEZ CONTRERAS",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 73.4,
+      "left": -124.8,
+      "attrs": { "color": "green", "xray": "1" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "btn1:2.r", "esp:25", "green", [ "h38.6", "v9.8" ] ],
+    [ "btn1:1.r", "esp:3V3", "red", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
