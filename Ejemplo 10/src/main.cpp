@@ -14,16 +14,9 @@ hw_timer_s *timer0 = NULL;
 
 uint32_t retardo = 250000;
 
-void IRAM_ATTR ISR_T0(){
-  bandera_TIMER = true;
-  timerAlarmWrite(timer0, retardo, false);
-  timerAlarmEnable(timer0);  
-}
 
-void IRAM_ATTR ISR_G25(){
-  bandera_INT = true;
-}
-
+void IRAM_ATTR ISR_T0();
+void IRAM_ATTR ISR_G25();
 void mostrarCuenta(uint8_t valor);
 
 void setup() {
@@ -39,7 +32,7 @@ void setup() {
   //Configuración de T0
   timer0 = timerBegin(0, 80, true);
   timerAttachInterrupt(timer0, &ISR_T0, true);
-  timerAlarmWrite(timer0, 250000, true);
+  timerAlarmWrite(timer0, retardo, true);
   timerAlarmEnable(timer0);
 
   //Valor Inicial
@@ -48,10 +41,14 @@ void setup() {
 
 void loop() {
   if(bandera_INT){
-    retardo = (retardo ==  250000) ? 1000000 : 250000;
+    if(retardo == 250000){
+      retardo = 1000000;
+    }else{
+      retardo = 250000;
+    }
     bandera_INT = false;
   }
-  if(bandera_TIMER){
+  if(bandera_TIMER){ 
     if(cuenta == 3){
       cuenta = 0;
     }else{
@@ -85,5 +82,15 @@ void mostrarCuenta(uint8_t valor){
   for(uint8_t i = 0; i<sizeof(LED)/sizeof(LED[0]); i++){
     digitalWrite(LED[i], estado[i]);
   }
+}
+
+void IRAM_ATTR ISR_T0(){
+  bandera_TIMER = true;
+  timerAlarmWrite(timer0, retardo, true);
+  timerAlarmEnable(timer0);  
+}
+
+void IRAM_ATTR ISR_G25(){
+  bandera_INT = true;
 }
 
