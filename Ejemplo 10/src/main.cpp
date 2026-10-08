@@ -48,7 +48,7 @@ void setup() {
 
 void loop() {
   if(bandera_INT){
-    retardo == 250000 ? retardo = 1000000 : 250000;
+    retardo = (retardo ==  250000) ? 1000000 : 250000;
     bandera_INT = false;
   }
   if(bandera_TIMER){
