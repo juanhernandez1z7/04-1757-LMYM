@@ -28,8 +28,13 @@
 			"path": "Ejemplo 9"
 		},
 		{
+<<<<<<< HEAD
 			"name": "Ejemplo 10",
 			"path": "Ejemplo 10"
+=======
+			"name": "ejemplo 10",
+			"path": "ejemplo 10"
+>>>>>>> 32937829e5b366bff90d2d1191648c62e15a801a
 		}
 	],
 	"settings": {}
